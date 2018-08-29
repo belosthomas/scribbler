@@ -1,3 +1,4 @@
+import os
 from os import listdir
 from os.path import join, isfile
 from random import randint
@@ -16,7 +17,7 @@ def list_resources(name):
     global resource_paths
 
     if not name in resource_paths:
-        dir_name = "resources/" + name
+        dir_name = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../../resources/" + name)
         resource_paths[name] = [join(dir_name, f) for f in listdir(dir_name) if isfile(join(dir_name, f))]
 
     return resource_paths[name]

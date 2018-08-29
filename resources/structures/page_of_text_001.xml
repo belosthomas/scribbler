@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Document width="596" height="842">
+    <TextLine x="16" y="16" width="564" height="48"/>
+    <VerticalLayout x="0" y="64" width="596" height="778" vertical_padding="8" horizontal_padding="8">
+        <HorizontalLayout>
+            <Paragraph font_size="22"/>
+            <Image/>
+        </HorizontalLayout>
+        <Paragraph font_size="22" type="handwriting"/>
+        <Paragraph font_size="22"/>
+    </VerticalLayout>
+</Document>

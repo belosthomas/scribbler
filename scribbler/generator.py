@@ -1,6 +1,7 @@
 from random import randint
 
 import torch
+import numpy as np
 from PIL import ImageDraw, Image, ImageFont
 from torch.utils.data.dataset import Dataset
 
@@ -11,8 +12,9 @@ from scribbler.utils.image.image import image_pillow_to_numpy
 
 class DocumentGenerator(Dataset):
 
-    def __init__(self):
+    def __init__(self, loss=None):
         self.documents = [parse_document(path) for path in list_resources("structures")]
+        self.loss = loss
 
     def __len__(self):
         return 1024
@@ -21,9 +23,16 @@ class DocumentGenerator(Dataset):
         document = self.documents[randint(0, len(self.documents) - 1)]
         document.generate_random()
         image = document.to_image()
+        width, height = image.size
 
-        # image = image_pillow_to_numpy(image)
-        return image, document.get_baselines()
+        image = np.array(image, dtype='float') / 255.0
+
+
+        if self.loss is None:
+            return torch.from_numpy(image), None
+
+        label = self.loss.document_to_ytrue(np.array([width, height], dtype='int32'), np.array(document.get_baselines(), dtype='int32'))
+        return torch.from_numpy(image), torch.from_numpy(label)
 
 
 class LineGeneratorHelper:

@@ -82,9 +82,9 @@ def peak_random_preloaded_text(name):
     return resource[randint(0, len(resource) - 1)]
 
 
-def get_random_text(self, name, min_size=10, max_size=50):
+def get_random_text(name, min_size=10, max_size=50):
     text = peak_random_preloaded_text(name)
-    text = "".join([c if self.labels.find(c) != -1 else "" for c in text])
+    # text = "".join([c if self.labels.find(c) != -1 else "" for c in text])
 
     p = randint(0, len(text) // 2)
     return text[p:p+randint(min_size, max_size)]

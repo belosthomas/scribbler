@@ -26,7 +26,7 @@ class DocumentGenerator(Dataset):
         return image, document.get_baselines()
 
 
-class LineGenerator:
+class LineGeneratorHelper:
 
     def __init__(self, labels):
         self.lst = labels
@@ -37,7 +37,7 @@ class LineGenerator:
         text_top = randint(0, 5)
         text_bottom = randint(0, 5)
 
-        text = get_random_text()
+        text = get_random_text("texts")
 
         font_height = randint(8, 30)
         font = ImageFont.truetype(peak_resource("fonts", index))
@@ -83,12 +83,12 @@ class LineGenerator:
         return self.lst
 
 
-class LineGeneratedSet(Dataset):
+class LineGenerator(Dataset):
 
     def __init__(self, labels="", width=None, height=32, transform=True, loss=None):
         self.width = width
         self.height = height
-        self.document_generator = LineGenerator(labels)
+        self.document_generator = LineGeneratorHelper(labels)
         self.transform = transform
         self.loss = loss
 
@@ -97,9 +97,15 @@ class LineGeneratedSet(Dataset):
         image = image_pillow_to_numpy(image_pillow)
 
         try:
-            return torch.from_numpy(image), (self.loss.preprocess_label(label, image.shape[2]), label, image.shape[2])
-        except:
-            return self.__getitem__(index)
+            if self.loss is None:
+                return torch.from_numpy(image), label
+            else:
+                return torch.from_numpy(image), (self.loss.preprocess_label(label, image.shape[2]), label, image.shape[2])
+        except Exception as e:
+            if index == 0:
+                raise e
+            else:
+                return self.__getitem__(0)
 
     def __len__(self):
         return count_resource("fonts") * 5

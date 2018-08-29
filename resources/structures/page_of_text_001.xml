@@ -6,7 +6,7 @@
             <Paragraph font_size="22"/>
             <Image/>
         </HorizontalLayout>
-        <Paragraph font_size="22" type="handwriting"/>
+        <Paragraph font_size="22"/>
         <Paragraph font_size="22"/>
     </VerticalLayout>
 </Document>

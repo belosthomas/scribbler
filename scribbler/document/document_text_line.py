@@ -88,4 +88,4 @@ class DocumentTextLine(AbstractDocument):
 
     def get_baselines(self):
         text_width, text_height = self.font.getsize(self.text)
-        return [[0, text_height // 2, text_width, text_height // 2, text_height]]
+        return [[0, text_height  * 3 // 4, text_width, text_height  * 3 // 4, text_height]]

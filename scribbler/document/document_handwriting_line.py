@@ -90,4 +90,4 @@ class DocumentHandwrittingLine(AbstractDocument):
             txt_width, _ = self.hwimage.size
             x = (width - txt_width) // 2
 
-        return [[x, self.height // 2, x + self.hwimage.size[0], self.height // 2, self.height]]
+        return [[x, self.height  * 3 // 4, x + self.hwimage.size[0], self.height * 3 // 4, self.height]]

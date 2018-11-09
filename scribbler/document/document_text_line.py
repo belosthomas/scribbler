@@ -1,6 +1,8 @@
 from PIL import Image, ImageFont, ImageDraw
+import numpy as np
 
 from scribbler.document import AbstractDocument
+from scribbler.document.abstract_document import DocumentType
 from scribbler.resources.resources_helper import peak_random_resource, peak_random_preloaded_text, peak_resource, \
     count_resource
 
@@ -39,6 +41,16 @@ class DocumentTextLine(AbstractDocument):
         image_draw.text((0, 0), self.text, font=self.font, fill=(0, 0, 0, 255))
 
         return image
+
+    def to_label(self):
+        # An exemple of to_label function (don't know if it's work)
+
+        width, height = self.get_size()
+        if width is None:
+            width, _ = self.font.getsize(self.text)
+
+        label = np.full((width, height, len(DocumentType)), DocumentType.TEXT)
+        return label
 
     def get_text(self):
         return self.text

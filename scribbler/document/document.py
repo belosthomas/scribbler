@@ -45,6 +45,18 @@ class Document(AbstractDocument):
 
         return image
 
+    def to_label(self):
+        width, height = self.background.size
+
+        # TODO :
+        # 1. Create an empty array containing DocumentType.BACKGROUND
+        # 2. for document, position in self.documents:
+        #     3. Call the function to_label of the document
+        #     4. Pase the label at the position 'position'
+        # 5. Return the new label
+
+        pass
+
     def generate_random(self, index=-1):
         for document, position in self.documents:
             document.generate_random(index)

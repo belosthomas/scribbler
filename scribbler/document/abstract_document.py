@@ -1,4 +1,5 @@
 from abc import ABCMeta, abstractmethod
+from enum import Enum
 
 
 class AbstractDocument:
@@ -11,6 +12,10 @@ class AbstractDocument:
 
     @abstractmethod
     def to_image(self):
+        pass
+
+    @abstractmethod
+    def to_label(self):
         pass
 
     def get_size(self):
@@ -29,3 +34,9 @@ class AbstractDocument:
     @abstractmethod
     def get_baselines(self):
         return []
+
+
+class DocumentType(Enum):
+    BACKGROUND = 0,
+    TEXT = 1,
+    IMAGE = 2

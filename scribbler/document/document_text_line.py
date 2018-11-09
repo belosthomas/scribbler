@@ -49,7 +49,8 @@ class DocumentTextLine(AbstractDocument):
         if width is None:
             width, _ = self.font.getsize(self.text)
 
-        label = np.full((width, height, len(DocumentType)), DocumentType.TEXT)
+        label = np.zeros((width, height, len(DocumentType)))
+        label[:, :, DocumentType.TEXT] = 1
         return label
 
     def get_text(self):

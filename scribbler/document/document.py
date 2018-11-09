@@ -49,11 +49,12 @@ class Document(AbstractDocument):
         width, height = self.background.size
 
         # TODO :
-        # 1. Create an empty array containing DocumentType.BACKGROUND
-        # 2. for document, position in self.documents:
-        #     3. Call the function to_label of the document
-        #     4. Pase the label at the position 'position'
-        # 5. Return the new label
+        # 1. Create an empty array of size (width, height, len(DocumentType))
+        # 2. This array must have ones for the channel of the DocumentType.BACKGROUND [:, :, DocumentType.BACKGROUND] and zeros otherwise
+        # 3. for document, position in self.documents:
+        #     3.1. Call the function to_label of the document
+        #     3.2. Pase the label at the position 'position'
+        # 4. Return the new label
 
         pass
 
